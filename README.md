@@ -48,7 +48,7 @@ This helps artists understand the quality of their artwork and identify areas fo
 - SQLite
 
 ### AI Integration
-- OpenAI API
+- OpenRouter API
 
 ---
 
