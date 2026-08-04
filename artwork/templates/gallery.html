@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Gallery
+{% endblock %}
+
+{% block content %}
+
+<div class="gallery-container">
+
+    <h1>Artwork Gallery</h1>
+
+    <div class="gallery-grid">
+
+        {% for artwork in artworks %}
+
+        <a href="{% url 'artwork_detail' artwork.id %}" class="card-link">
+
+            <div class="gallery-card">
+
+                <img src="{{ artwork.image.url }}">
+
+                <h3>{{ artwork.title }}</h3>
+
+                <small>
+
+                    {{ artwork.uploaded_at }}
+
+                </small>
+
+            </div>
+
+        </a>
+
+        {% empty %}
+
+        <h2>
+
+            No Artwork Uploaded Yet
+
+        </h2>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

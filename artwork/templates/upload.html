@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Upload Artwork
+{% endblock %}
+
+{% block content %}
+
+<div class="upload-container">
+
+    <h1>
+    {% if edit %}
+        Edit Artwork
+    {% else %}
+        Upload Artwork
+    {% endif %}
+    </h1>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn">
+            {% if edit %}
+            Save Changes
+            {% else %}
+            Upload
+            {% endif %}
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

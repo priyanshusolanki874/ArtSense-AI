@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        {% if user.is_authenticated %}
+        <p class="welcome-text">
+            Welcome, {{ user.username }}👋
+        </p>
+    {% endif %}
+
+        <h1>
+            Analyze Your Art with ArtSense AI
+        </h1>
+
+        <p>
+
+            Upload your sketches and receive detailed AI feedback on anatomy,
+            composition, lighting and perspective.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'upload' %}" class="btn">
+                Upload Artwork
+            </a>
+
+            <a href="{% url 'gallery' %}" class="btn-outline">
+                View Gallery
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <div class="hero-right">
+        <img src="static/css/images/ArtSensehome.png"
+         alt="ArtSense AI">
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="card">
+
+        <h2>🤖 AI Feedback</h2>
+
+        <p>
+            Detailed analysis of composition,
+            shading and anatomy.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>📈 Progress</h2>
+
+        <p>
+            Track your improvement over time
+            with visual reports.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>🏆 Challenges</h2>
+
+        <p>
+            Complete weekly drawing
+            challenges and level up.
+        </p>
+
+    </div>
+
+</section>
+{% endblock %}

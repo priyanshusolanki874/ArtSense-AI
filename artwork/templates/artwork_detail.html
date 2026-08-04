@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ artwork.title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="detail-container">
+
+    <div class="detail-image">
+        <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}">
+    </div>
+
+    <div class="detail-info">
+
+        <h1>{{ artwork.title }}</h1>
+
+        <p class="upload-date">
+            Uploaded on {{ artwork.uploaded_at }}
+        </p>
+
+        <div class="action-buttons">
+
+            <a href="{% url 'analyze' artwork.id %}"
+                class="btn"
+                id="analyze-btn">
+                Analyze with AI
+            </a>
+
+            <a href="{% url 'delete_artwork' artwork.id %}"
+               class="btn-delete"
+               onclick="return confirm('Are you sure you want to delete this artwork?')">
+                Delete Artwork
+            </a>
+
+            <a href="{% url 'edit_artwork' artwork.id %}"
+               class="btn">
+                Edit Artwork
+            </a>
+
+        </div>
+
+        <div class="score-card">
+
+            <h2>{{ artwork.ai_score }}/100</h2>
+
+            {% if artwork.ai_score >= 90 %}
+                <p>Excellent Artwork🏆</p>
+
+            {% elif artwork.ai_score >= 80 %}
+                <p>Very Good Artwork⭐</p>
+
+            {% elif artwork.ai_score >= 70 %}
+                <p>Good Artwork👍</p>
+
+            {% else %}
+                <p>Needs Improvement📚</p>
+
+            {% endif %}
+
+        </div>
+
+        <div class="analysis-card strengths">
+            <h3>🟢 Strengths</h3>
+            <p>{{ artwork.ai_strengths|linebreaks }}</p>
+        </div>
+
+        <div class="analysis-card weaknesses">
+            <h3>🔴 Weaknesses</h3>
+            <p>{{ artwork.ai_weaknesses|linebreaks }}</p>
+        </div>
+
+        <div class="analysis-card suggestions">
+            <h3>💡 Suggestions</h3>
+            <p>{{ artwork.ai_suggestions|linebreaks }}</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+
+    <div class="loader"></div>
+
+    <h2>AI is analyzing your artwork...</h2>
+
+    <p>Please wait a few seconds.</p>
+
+</div>
+
+<script>
+
+document.getElementById("analyze-btn").addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    document.getElementById("loading-screen").style.display = "flex";
+
+    const url = this.href;
+
+    setTimeout(function(){
+        window.location.href = url;
+    }, 100);
+
+});
+
+</script>
+
+{% endblock %}
